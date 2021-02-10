@@ -44,18 +44,22 @@ func PrintCard(session *discordgo.Session, message *discordgo.Message, param str
 
 	response, err := http.Get(finalURI)
 	if err != nil {
-		_, _ = session.ChannelMessageSend(message.ChannelID, "Can't find the infocard")
+		_, _ = session.ChannelMessageSend(message.ChannelID, "J'ai eu un problème en allant chercher ta carte")
 	}
 	resBody, _ := ioutil.ReadAll(response.Body)
 
 	var c JSON
 	_ = json.Unmarshal(resBody, &c)
 
-	_, _ = session.ChannelMessageSendEmbed(message.ChannelID, &discordgo.MessageEmbed{
-		Description: c.Card[0].Name,
-		Color:       0x000000,
-		Image: &discordgo.MessageEmbedImage{
-			URL: c.Card[0].Images[0].Url,
-		},
-	})
+	if len(c.Card) == 0 {
+		_, _ = session.ChannelMessageSend(message.ChannelID, "Je n'est pas trouvé ta carte")
+	} else {
+		_, _ = session.ChannelMessageSendEmbed(message.ChannelID, &discordgo.MessageEmbed{
+			Description: c.Card[0].Name,
+			Color:       0x000000,
+			Image: &discordgo.MessageEmbedImage{
+				URL: c.Card[0].Images[0].Url,
+			},
+		})
+	}
 }
