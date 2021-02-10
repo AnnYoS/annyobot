@@ -1,14 +1,13 @@
 package command
 
 import (
+	"annyobot/command/model"
 	"annyobot/runner/basic"
 	"annyobot/runner/infocard"
 )
 
-var Association map[string]Command
-
-func FindCommand(msg string) *Command {
-	c, found := Association[msg]
+func FindCommand(msg string) *model.Command {
+	c, found := model.Association[msg]
 	if !found {
 		return nil
 	}
@@ -16,16 +15,16 @@ func FindCommand(msg string) *Command {
 }
 
 func Associate() {
-	Association = make(map[string]Command)
-	Association["!hello"] = Command{Command: "!hello", Desc: "Say hello, nothing more", Param: "",
-		Options: []Option{{Opt: "-a", Desc: "Say hello to everyone"}, {Opt: "-m", Desc: "Say hello to yourself"}}, Run: basic.Hello}
+	model.Association = make(map[string]model.Command)
+	model.Association["!hello"] = model.Command{Command: "!hello", Desc: "Say hello, nothing more", Param: "",
+		Options: []model.Option{{Opt: "-a", Desc: "Say hello to everyone"}, {Opt: "-m", Desc: "Say hello to yourself"}}, Run: basic.Hello}
 
-	Association["!help"] = Command{Command: "!help", Desc: "Giving help about my commands", Param: "None or command you want to know about (example for !hello, give hello)",
-		Options: []Option{}, Run: basic.Help}
+	model.Association["!help"] = model.Command{Command: "!help", Desc: "Giving help about my commands", Param: "None or command you want to know about (example for !hello, give hello)",
+		Options: []model.Option{}, Run: Help}
 
-	Association["!start"] = Command{Command: "!start", Desc: "Give the basic about the bot", Param: "",
-		Options: []Option{}, Run: basic.GetStart}
+	model.Association["!start"] = model.Command{Command: "!start", Desc: "Give the basic about the bot", Param: "",
+		Options: []model.Option{}, Run: basic.GetStart}
 
-	Association["!infocard"] = Command{Command: "!infocard", Desc: "I print Yu-Gi-Oh infocard you want !", Param: "Name of the infocard",
-		Options: []Option{{Opt: "-f", Desc: "Name in french"}}, Run: infocard.PrintCard}
+	model.Association["!infocard"] = model.Command{Command: "!infocard", Desc: "I print Yu-Gi-Oh infocard you want !", Param: "Name of the infocard",
+		Options: []model.Option{{Opt: "-f", Desc: "Name in french"}}, Run: infocard.PrintCard}
 }

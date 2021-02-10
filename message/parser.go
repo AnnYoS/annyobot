@@ -1,13 +1,13 @@
 package message
 
 import (
-	"annyobot/command"
+	"annyobot/command/model"
 
 	"fmt"
 	"strings"
 )
 
-func TransformToCommand(msg string) (*command.Command, error) {
+func TransformToCommand(msg string) (*model.Command, error) {
 	lastChar := "!"
 	for _, s := range msg {
 		if strings.HasPrefix(string(s), "-") && lastChar != " " {
@@ -16,7 +16,7 @@ func TransformToCommand(msg string) (*command.Command, error) {
 		lastChar = string(s)
 	}
 
-	var c command.Command
+	var c model.Command
 	split := strings.Split(msg, " ")
 	c.Command = split[0]
 	c.Param = ""
@@ -40,13 +40,13 @@ func TransformToCommand(msg string) (*command.Command, error) {
 
 	for _, s := range split {
 		if strings.HasPrefix(s, "-") {
-			c.Options = append(c.Options, command.Option{Opt: s, Desc: ""})
+			c.Options = append(c.Options, model.Option{Opt: s, Desc: ""})
 		}
 	}
 	return &c, nil
 }
 
-func VerifyOptions(opts []command.Option, theoric []command.Option) bool {
+func VerifyOptions(opts []model.Option, theoric []model.Option) bool {
 	var res = false
 	for _, s := range opts {
 		res = false

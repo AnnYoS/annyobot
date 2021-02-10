@@ -1,7 +1,7 @@
 package infocard
 
 import (
-	"annyobot/command"
+	"annyobot/command/model"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -22,14 +22,13 @@ type Card struct {
 	Images []CardImg `json:"card_images"`
 }
 
-
 type CardImg struct {
 	Id       int    `json:"id"`
 	Url      string `json:"image_url"`
 	UrlSmall string `json:"image_url_small"`
 }
 
-func PrintCard(session *discordgo.Session, message *discordgo.Message, param string, options []command.Option) {
+func PrintCard(session *discordgo.Session, message *discordgo.Message, param string, options []model.Option) {
 	paramSplit := strings.Split(param, " ")
 	finalURI := basicURI + "?name="
 	for i, s := range paramSplit {

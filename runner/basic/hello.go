@@ -1,11 +1,11 @@
 package basic
 
 import (
-	"annyobot/command"
+	"annyobot/command/model"
 	"github.com/bwmarrin/discordgo"
 )
 
-func Hello(session *discordgo.Session, message *discordgo.Message, param string, options []command.Option) {
+func Hello(session *discordgo.Session, message *discordgo.Message, param string, options []model.Option) {
 	if len(options) > 1 {
 		_, _ = session.ChannelMessageSend(message.ChannelID, "I can't know what you want")
 
