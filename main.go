@@ -3,6 +3,7 @@ package main
 import (
 	"annyobot/command"
 	"annyobot/message"
+  "annyobot/keepalive"
 	"fmt"
 	"log"
 	"os"
@@ -16,7 +17,8 @@ import (
 var Token string
 
 func main() {
-	initConsole()
+	//initConsole()
+  go keepalive.KeepAlive()
 	initDiscordSession()
 }
 
