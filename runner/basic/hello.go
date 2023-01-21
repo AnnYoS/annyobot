@@ -17,7 +17,7 @@ func GetStart(session *discordgo.Session, message *discordgo.Message, param stri
 
 func Hello(session *discordgo.Session, message *discordgo.Message, param string, options []model.Option) {
 	if len(options) > 1 {
-		_, _ = session.ChannelMessageSend(message.ChannelID, "Oula tu m'en demmande trop")
+		_, _ = session.ChannelMessageSend(message.ChannelID, "Oula tu m'en demande trop")
 
 	} else {
 		if options == nil {

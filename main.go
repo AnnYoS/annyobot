@@ -2,8 +2,8 @@ package main
 
 import (
 	"annyobot/command"
+	"annyobot/keepalive"
 	"annyobot/message"
-  "annyobot/keepalive"
 	"fmt"
 	"log"
 	"os"
@@ -17,14 +17,14 @@ import (
 var Token string
 
 func main() {
-	//initConsole()
-  go keepalive.KeepAlive()
+	initConsole()
+	go keepalive.KeepAlive()
 	initDiscordSession()
 }
 
 func initConsole() {
 	fmt.Println(`     
-	 _             __   __     __     ______        _   
+     _             __   __     __     ______        _   
     / \   _ __  _ _\ \ / /__   \ \   / / __ )  ___ | |_ 
    / _ \ | '_ \| '_ \ V / _ \   \ \ / /|  _ \ / _ \| __|
   / ___ \| | | | | | | | (_) |   \ V / | |_) | (_) | |_ 

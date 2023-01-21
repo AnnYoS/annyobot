@@ -3,8 +3,9 @@ package infocard
 import (
 	"annyobot/command/model"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
+
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
@@ -46,7 +47,7 @@ func PrintCard(session *discordgo.Session, message *discordgo.Message, param str
 	if err != nil {
 		_, _ = session.ChannelMessageSend(message.ChannelID, "J'ai eu un problème en allant chercher ta carte")
 	}
-	resBody, _ := ioutil.ReadAll(response.Body)
+	resBody, _ := io.ReadAll(response.Body)
 
 	var c JSON
 	_ = json.Unmarshal(resBody, &c)
